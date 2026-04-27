@@ -185,7 +185,6 @@ def draw_heatmap9(ax, pivot, title, show_ylabel=True):
         for j in range(ncols):
             raw    = pivot.values[i, j]
             normed = norm9(min(raw, vmax9))
-            use_white = normed < 0.28 or normed > 0.80
             ax.text(j, i, f'{raw:.3f}',
                     ha='center', va='center',
                     fontsize=11, fontfamily='monospace',
@@ -256,7 +255,7 @@ print("\nFigure 3: Variance Ratio")
 part3_var   = results_df[results_df['part'] == 1].copy()
 ab_sq_values = sorted(part3_var['ab_squared'].unique())
 
-fig5, ax = plt.subplots(figsize=(9, 6))
+fig3, ax = plt.subplots(figsize=(9, 6))
 
 for idx, ab_sq in enumerate(ab_sq_values):
     col    = CB_COLORS[idx % len(CB_COLORS)]
@@ -351,7 +350,7 @@ part4['var_true'] = part4.apply(
                                    r['a'], r['b']), axis=1)
 part4['var_bias_ratio'] = part4['var_true'] / part4['stratified_var_mean']
 
-fig5b, ax = plt.subplots(figsize=(9, 4.2))
+fig4, ax = plt.subplots(figsize=(9, 4.2))
 
 for idx, ab_sq in enumerate(ab_sq_values):
     col    = CB_COLORS[idx % len(CB_COLORS)]
@@ -382,7 +381,7 @@ ax.set_xticklabels(XLABS_STD, fontsize=10)
 ax.set_ylim([0.995, 1.055])   
 ax.tick_params(axis='y', labelsize=10)
 plt.tight_layout()
-plt.savefig('fig5b_stratified_var_bias.png', dpi=150, bbox_inches='tight')
+plt.savefig('fig4_stratified_var_bias.png', dpi=150, bbox_inches='tight')
 plt.show()
 
 # =============================================================================
